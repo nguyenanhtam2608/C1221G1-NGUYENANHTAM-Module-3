@@ -10,6 +10,7 @@ body{
 img{
     width: auto;
     max-width: 80%;
+    border: 0px;
 }
 a{
     text-decoration: none;
