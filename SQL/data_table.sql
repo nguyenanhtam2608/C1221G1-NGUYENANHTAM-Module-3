@@ -37,4 +37,6 @@ insert into dich_vu values(1,'Villa',100,1000,5,1,1,'4 sao','Điều hòa',20,3)
 insert into dich_vu values(2,'House',200,10000,10,2,2,'5 sao','Điều hòa',20,5);
 
 
-select *from furama.trinh_do;
+select * 
+from furama.nhan_vien
+where ho_ten like "N%";
