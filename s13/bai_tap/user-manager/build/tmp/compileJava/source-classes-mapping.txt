@@ -1,0 +1,16 @@
+com/codegym/repository/ICrudRepository.java
+ com.codegym.repository.ICrudRepository
+com/codegym/model/User.java
+ com.codegym.model.User
+com/codegym/repository/IUsersRepository.java
+ com.codegym.repository.IUsersRepository
+com/codegym/controller/UserServlet.java
+ com.codegym.controller.UserServlet
+com/codegym/repository/BaseRepository.java
+ com.codegym.repository.BaseRepository
+com/codegym/service/impl/UsersService.java
+ com.codegym.service.impl.UsersService
+com/codegym/service/IUsersService.java
+ com.codegym.service.IUsersService
+com/codegym/repository/impl/UsersRepository.java
+ com.codegym.repository.impl.UsersRepository
