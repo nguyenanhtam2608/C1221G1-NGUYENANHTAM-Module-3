@@ -27,17 +27,26 @@
             </tr>
 
             <tr>
-                <th>Id type Customer</th>
-                <td><input type="text" name="customer_type_id" size="45"></td>
+                <td>Customer Type:</td>
+                <td><select name="customer_type_id" id="type">
+                    <c:forEach var="customerType" items="${customerTypeList}">
+                        <option value="${customerType.idCustomerType}">
+                                ${customerType.nameCustomerType}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>
                 <th>Birth Day</th>
                 <td><input type="date" name="customer_birth_day" size="45"></td>
             </tr>
-            <tr>
-                <th>Gender</th>
-                <td><input type="text" name="customer_gender" size="45"></td>
+          <tr>
+                <td>Customer Gender:</td>
+                <td><select name="customer_gender" id="gender">
+                    <option value="0">Female</option>
+                    <option value="1" selected>Male</option>
+                </select></td>
+            </tr>
             </tr>
             <tr>
                 <th>CMND</th>

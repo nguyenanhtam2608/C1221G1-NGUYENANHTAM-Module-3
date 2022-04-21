@@ -3,11 +3,15 @@ package case_study.service.impl;
 import case_study.model.Customer;
 import case_study.reposition.CustomerRepository;
 import case_study.reposition.impl.CustomerRepositoryImpl;
+import case_study.service.CustomerService;
 
+
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceImpl implements case_study.service.CustomerService {
+public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
     @Override
@@ -27,11 +31,16 @@ public class CustomerServiceImpl implements case_study.service.CustomerService {
 
     @Override
     public Customer findById(int id) {
-        return  customerRepository.findById(id);
+        return customerRepository.findById(id);
     }
 
     @Override
     public boolean updateCustomer(Customer customer) {
         return customerRepository.updateCustomer(customer);
+    }
+
+    @Override
+    public List<Customer> searchName(String name) {
+        return customerRepository.searchName(name);
     }
 }

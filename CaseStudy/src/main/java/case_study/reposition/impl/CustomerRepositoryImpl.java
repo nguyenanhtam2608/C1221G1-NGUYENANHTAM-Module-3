@@ -15,7 +15,7 @@ public class CustomerRepositoryImpl implements case_study.reposition.CustomerRep
     private static final String INSERT_CUSTOMER = "insert into customer (customer_type_id ,customer_name,customer_birthday,customer_gender,customer_id_card,customer_phone,customer_email,customer_address) values( ?,?,?,?,?,?,?,?);";
     private static final String DELETE_CUSTOMER = "delete from customer where customer_id =?";
     private static final String SELECT_ID_CUSTOMER = "select * from customer where customer_id=?";
-    private static final String UPDATE_CUSTOMER = "update customer set customer_type_id = ?, customer_name = ?,  customer_birthday = ? , customer_gender = ?, customer_id_card=?, customer_phone = ?, customer_email=?,customer_address=?";
+    private static final String UPDATE_CUSTOMER = "update customer set customer_type_id = ?, customer_name = ?,  customer_birthday = ? , customer_gender = ?, customer_id_card=?, customer_phone = ?, customer_email=?,customer_address=? where customer_id=? ";
     private BaseRepository baseRepository = new BaseRepository();
 
     @Override
@@ -118,12 +118,51 @@ public class CustomerRepositoryImpl implements case_study.reposition.CustomerRep
             preparedStatement.setString(6, customer.getCustomer_phone());
             preparedStatement.setString(7, customer.getCustomer_email());
             preparedStatement.setString(8, customer.getCustomer_address());
+            preparedStatement.setInt(9, customer.getId_customer());
 
-            rowUpdate =preparedStatement.executeUpdate() >0;
+
+            rowUpdate = preparedStatement.executeUpdate() > 0;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return rowUpdate;
+    }
+
+    @Override
+    public List<Customer> searchName(String name) {
+        List<Customer> customerList = new ArrayList<>();
+        Customer customer;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = this.baseRepository.getConnection().prepareStatement("select  * from customer where customer_name like ?");
+            preparedStatement.setString(1, "%" + name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                customer = new Customer();
+                customer.setId_customer(resultSet.getInt("customer_type_id"));
+                customer.setCustomer_name(resultSet.getString("customer_name"));
+                customer.setCustomer_birthday(resultSet.getString("customer_birthday"));
+                customer.setCustomer_gender(Integer.parseInt(resultSet.getString("customer_gender")));
+                customer.setCustomer_id_card(Integer.parseInt(resultSet.getString("customer_id_card")));
+                customer.setCustomer_phone(resultSet.getString("customer_phone"));
+                customer.setCustomer_email(resultSet.getString("customer_email"));
+                customer.setCustomer_address(resultSet.getString("customer_address"));
+                customerList.add(customer);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return customerList;
+
+
     }
 
 

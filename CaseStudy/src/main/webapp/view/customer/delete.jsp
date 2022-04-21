@@ -18,7 +18,7 @@
 <form method="post">
     <h1> Are you sure ? </h1>
     <fieldset>
-        <legend> Customer</legend>
+
         <table>
             <tr>
                 <td> Name :</td>

@@ -11,8 +11,7 @@ public class Customer {
     private String customer_email;
     private String customer_address;
 
-
-    public Customer(int id_customer, int customer_type_id, String customer_name, String customer_birthday, int customer_gender, int customer_id_card, String customer_phone, String customer_email, String customer_address) {
+    public Customer(Integer id_customer, Integer customer_type_id, String customer_name, String customer_birthday, Integer customer_gender, Integer customer_id_card, String customer_phone, String customer_email, String customer_address) {
         this.id_customer = id_customer;
         this.customer_type_id = customer_type_id;
         this.customer_name = customer_name;
@@ -24,8 +23,6 @@ public class Customer {
         this.customer_address = customer_address;
     }
 
-    public Customer() {
-    }
 
     public Customer(int customer_type_id, String customer_name, String customer_birthday, int customer_gender, int customer_id_card, String customer_phone, String customer_email, String customer_address) {
         this.customer_type_id = customer_type_id;
@@ -38,12 +35,24 @@ public class Customer {
         this.customer_address = customer_address;
     }
 
-    public int getId_customer() {
+    public Customer() {
+
+    }
+
+    public Integer getId_customer() {
         return id_customer;
     }
 
-    public void setId_customer(int id_customer) {
+    public void setId_customer(Integer id_customer) {
         this.id_customer = id_customer;
+    }
+
+    public Integer getCustomer_type_id() {
+        return customer_type_id;
+    }
+
+    public void setCustomer_type_id(Integer customer_type_id) {
+        this.customer_type_id = customer_type_id;
     }
 
     public String getCustomer_name() {
@@ -62,19 +71,19 @@ public class Customer {
         this.customer_birthday = customer_birthday;
     }
 
-    public int getCustomer_gender() {
+    public Integer getCustomer_gender() {
         return customer_gender;
     }
 
-    public void setCustomer_gender(int customer_gender) {
+    public void setCustomer_gender(Integer customer_gender) {
         this.customer_gender = customer_gender;
     }
 
-    public int getCustomer_id_card() {
+    public Integer getCustomer_id_card() {
         return customer_id_card;
     }
 
-    public void setCustomer_id_card(int customer_id_card) {
+    public void setCustomer_id_card(Integer customer_id_card) {
         this.customer_id_card = customer_id_card;
     }
 
@@ -100,13 +109,5 @@ public class Customer {
 
     public void setCustomer_address(String customer_address) {
         this.customer_address = customer_address;
-    }
-
-    public int getCustomer_type_id() {
-        return customer_type_id;
-    }
-
-    public void setCustomer_type_id(int customer_type_id) {
-        this.customer_type_id = customer_type_id;
     }
 }
