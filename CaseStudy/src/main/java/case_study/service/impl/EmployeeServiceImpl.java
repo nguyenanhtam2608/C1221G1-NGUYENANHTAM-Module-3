@@ -18,4 +18,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void insertEmployee(Employee employee) throws SQLException {
         employeeRepository.insertEmployee(employee);
     }
+
+    @Override
+    public boolean deleteEmployee(int id) throws SQLException {
+        return employeeRepository.deleteEmployee(id);
+    }
+
+    @Override
+    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail) {
+        return employeeRepository.searchByNamePositionEmail(keywordName,keywordPosition,keywordEmail);
+    }
+
 }

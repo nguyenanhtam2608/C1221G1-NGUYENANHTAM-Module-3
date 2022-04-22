@@ -1,8 +1,14 @@
 package case_study.controller;
 
+import case_study.model.RentType;
 import case_study.model.Service;
+import case_study.model.ServiceType;
+import case_study.service.RentTypeService;
 import case_study.service.ServiceService;
+import case_study.service.ServiceTypeService;
+import case_study.service.impl.RentTypeServiceImpl;
 import case_study.service.impl.ServiceServiceIpml;
+import case_study.service.impl.ServiceTypeServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,6 +21,8 @@ import java.util.List;
 @WebServlet(name = "ServiceController", urlPatterns = "/service")
 public class ServiceController extends HttpServlet {
     ServiceService serviceService = new ServiceServiceIpml();
+    ServiceTypeService serviceTypeService = new ServiceTypeServiceImpl();
+    RentTypeService rentTypeService = new RentTypeServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,6 +44,12 @@ public class ServiceController extends HttpServlet {
     }
 
     private void showCreateService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Service> serviceList = serviceService.selectAllService();
+        request.setAttribute("serviceList", serviceList);
+        List<ServiceType> serviceTypeList = serviceTypeService.selectAllServiceType();
+        request.setAttribute("serviceTypeList", serviceTypeList);
+        List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+        request.setAttribute("rentTypeList", rentTypeList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/create.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -43,6 +57,11 @@ public class ServiceController extends HttpServlet {
     private void showListService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Service> serviceList = serviceService.selectAllService();
         request.setAttribute("serviceList", serviceList);
+        List<ServiceType> serviceTypeList = serviceTypeService.selectAllServiceType();
+        request.setAttribute("serviceTypeList", serviceTypeList);
+        List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+        request.setAttribute("rentTypeList", rentTypeList);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/service/list.jsp");
         requestDispatcher.forward(request, response);
 

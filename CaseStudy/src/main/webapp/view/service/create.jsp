@@ -43,12 +43,22 @@
 
             <tr>
                 <th>Rent Type ID</th>
-                <td><input type="text" name="rentTypeId" size="45"></td>
+                <td><select name="rentTypeId" >
+                    <c:forEach var="rentTypeList" items="${rentTypeList}">
+                        <option value="${rentTypeList.idRentType}">
+                                ${rentTypeList.nameRentType}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>
                 <th>Service Type id</th>
-                <td><input type="text" name="serviceTypeId" size="45"></td>
+                <td><select name="serviceTypeId" >
+                    <c:forEach var="serviceTypeList" items="${serviceTypeList}">
+                        <option value="${serviceTypeList.idServiceType}">
+                                ${serviceTypeList.nameServiceType}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>

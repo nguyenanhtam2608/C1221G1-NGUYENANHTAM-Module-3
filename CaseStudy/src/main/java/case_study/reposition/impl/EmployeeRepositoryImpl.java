@@ -4,6 +4,7 @@ import case_study.model.Employee;
 import case_study.reposition.BaseRepository;
 import case_study.reposition.EmployeeRepository;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,16 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-        private static final String INSERTEMPLOYEE =" insert into employee ( employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id) values (?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERTEMPLOYEE = " insert into employee ( employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id) values (?,?,?,?,?,?,?,?,?,?)";
+    private static final String DELETEEMPLOYEE = "delete from employee where employee_id=?";
+
     BaseRepository baseRepository = new BaseRepository();
 
     @Override
     public List<Employee> selectAllEmployee() {
-        List<Employee> employeeList= new ArrayList<>();
+        List<Employee> employeeList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("select * from employee");
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("employee_id");
                 String name = resultSet.getString("employee_name");
                 String birthdate = resultSet.getString("employee_birthday");
@@ -32,7 +35,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 int positionId = resultSet.getInt("position_id");
                 int educationDegreeId = resultSet.getInt("education_degree_id");
                 int divisionId = resultSet.getInt("division_id");
-                employeeList.add(new Employee(id,name,birthdate,employeeIdCard,employeeSalary,employeePhone,employeeEmail,employeeAddress,positionId,educationDegreeId,divisionId));
+                employeeList.add(new Employee(id, name, birthdate, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId));
 
             }
 
@@ -47,18 +50,34 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public void insertEmployee(Employee employee) throws SQLException {
         PreparedStatement preparedStatement = baseRepository.getConnection().prepareStatement(INSERTEMPLOYEE);
-        preparedStatement.setString(1,employee.getNameEmployee());
-        preparedStatement.setString(2,employee.getBirthdayEmployee());
-        preparedStatement.setInt(3,employee.getIdCardEmployee());
-        preparedStatement.setDouble(4,employee.getSalaryEmployee());
-        preparedStatement.setDouble(5,employee.getPhoneEmployee());
-        preparedStatement.setString(6,employee.getEmailEmployee());
-        preparedStatement.setString(7,employee.getAddressEmployee());
-        preparedStatement.setInt(8,employee.getIdPosition());
-        preparedStatement.setInt(9,employee.getIdEducationDegree());
-        preparedStatement.setInt(10,employee.getIdDivision());
+        preparedStatement.setString(1, employee.getNameEmployee());
+        preparedStatement.setString(2, employee.getBirthdayEmployee());
+        preparedStatement.setInt(3, employee.getIdCardEmployee());
+        preparedStatement.setDouble(4, employee.getSalaryEmployee());
+        preparedStatement.setDouble(5, employee.getPhoneEmployee());
+        preparedStatement.setString(6, employee.getEmailEmployee());
+        preparedStatement.setString(7, employee.getAddressEmployee());
+        preparedStatement.setInt(8, employee.getIdPosition());
+        preparedStatement.setInt(9, employee.getIdEducationDegree());
+        preparedStatement.setInt(10, employee.getIdDivision());
         preparedStatement.executeUpdate();
 
 
+    }
+
+    @Override
+    public boolean deleteEmployee(int id) throws SQLException {
+        boolean rowDelete;
+        Connection connection = baseRepository.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETEEMPLOYEE);
+
+        preparedStatement.setInt(1, id);
+        rowDelete = preparedStatement.executeUpdate() > 0; //có phần tử mới được xóa
+        return rowDelete;
+    }
+
+    @Override
+    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail) {
+        return null;
     }
 }

@@ -26,7 +26,7 @@
 <div style="text-align: center">
     <caption><h2>List of Service</h2></caption>
 
-    <table class="table" id     ="example">
+    <table class="table" id ="example">
         <thead class="thead-dark">
         <tr style="position: -webkit-sticky;
     position: sticky;
@@ -60,8 +60,22 @@ z-index: 2;">
                 <td>${employee.serviceArea}</td>
                 <td>${employee.cost}</td>
                 <td>${employee.serviceMaxPeople}</td>
-                <td>${employee.rentTypeId}</td>
-                <td>${employee.serviceTypeId}</td>
+
+                <c:forEach var="rentTypeList" items="${rentTypeList}">
+
+                    <c:if test="${employee.rentTypeId== rentTypeList.idRentType}">
+                        <td><c:out value="${rentTypeList.nameRentType}"></c:out></td>
+                    </c:if>
+                </c:forEach>
+
+
+
+                <c:forEach var="serviceTypeList" items="${serviceTypeList}">
+
+                    <c:if test="${employee.serviceTypeId== serviceTypeList.idServiceType}">
+                        <td><c:out value="${serviceTypeList.nameServiceType}"></c:out></td>
+                    </c:if>
+                </c:forEach>
                 <td>${employee.standardRoom}</td>
                 <td>${employee.descriptionOtherConvenience}</td>
                 <td>${employee.poolArea}</td>

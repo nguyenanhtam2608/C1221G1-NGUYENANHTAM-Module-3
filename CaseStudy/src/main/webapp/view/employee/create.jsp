@@ -58,17 +58,32 @@
 
             <tr>
                 <th>Id Position</th>
-                <td><input type="text" name="idPosition" size="45"></td>
+                <td><select name="idPosition" >
+                    <c:forEach var="positionList" items="${positionList}">
+                        <option value="${positionList.idPosition}">
+                                ${positionList.namePosition}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>
                 <th>Id Education Degree</th>
-                <td><input type="text" name="idEducationDegree" size="45"></td>
+                <td><select name="idEducationDegree" >
+                    <c:forEach var="educationDegreeList" items="${educationDegreeList}">
+                        <option value="${educationDegreeList.idEducationDegree}">
+                                ${educationDegreeList.nameEducationDegree}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>
                 <th>ID Division</th>
-                <td><input type="text" name="idDivision" size="45"></td>
+                <td><select name="idDivision" >
+                    <c:forEach var="divisionList" items="${divisionList}">
+                        <option value="${divisionList.idDivision}">
+                                ${divisionList.nameDivision}</option>
+                    </c:forEach>
+                </select></td>
             </tr>
 
             <tr>

@@ -21,6 +21,27 @@
 <a href="employee?action=create">Thêm mới Employee</a>
 
 
+<form action="/employee" method="get">
+    <input type="text" placeholder="Input Employee's name" name="searchName">
+
+    <select name="searchPosition" >
+
+        <option value="%">--Choose Position--</option>
+
+        <c:forEach var="positionList" items="${positionList}">
+
+                <option value="${positionList.idPosition}">
+                    ${positionList.namePosition}
+
+        </c:forEach>
+    </select>
+
+    <input type="text" placeholder="Input Employee's email" name="searchEmail">
+
+
+    <input type="hidden" name="action" value="search">
+    <button type="submit">Search</button>
+</form>
 
 
 <div style="text-align: center">
@@ -63,17 +84,44 @@ z-index: 2;">
                 <td>${employee.phoneEmployee}</td>
                 <td>${employee.emailEmployee}</td>
                 <td>${employee.addressEmployee}</td>
-                <td>${employee.idPosition}</td>
-                <td>${employee.idEducationDegree}</td>
-                <td>${employee.idDivision}</td>
+
+                    <%--                  Position--%>
+                <c:forEach var="positionList" items="${positionList}">
+
+                    <c:if test="${employee.idPosition== positionList.idPosition}">
+                        <td><c:out value="${positionList.namePosition}"></c:out></td>
+                    </c:if>
+                </c:forEach>
+
+                    <%--                    Education Degree--%>
+                <c:forEach var="educationDegreeList" items="${educationDegreeList}">
+
+                    <c:if test="${employee.idEducationDegree== educationDegreeList.idEducationDegree}">
+                        <td><c:out value="${educationDegreeList.nameEducationDegree}"></c:out></td>
+                    </c:if>
+                </c:forEach>
+
+                    <%--                Division--%>
+
+
+                <c:forEach var="divisionList" items="${divisionList}">
+
+                    <c:if test="${employee.idDivision== divisionList.idDivision}">
+                        <td><c:out value="${divisionList.nameDivision}"></c:out></td>
+                    </c:if>
+                </c:forEach>
+
                 <td>
                     <a href="/employee?action=edit&id=${employee.idEmployee}"
                        style="text-decoration: none">EDIT</a>
                 </td>
                 <td>
-                    <a href="/employee?action=delete&id=${employee.idEmployee}"
-                       style="text-decoration: none">DELETE</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                            onclick="confirmDelete(${employee.idEmployee}, '${employee.nameEmployee}')">
+                        Delete
+                    </button>
                 </td>
+
             </tr>
 
         </c:forEach>
@@ -81,6 +129,39 @@ z-index: 2;">
 
 
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm delete?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="post" >
+<%--                    gửi qua method post của trang employee--%>
+                    <div class="modal-body">
+                        Do you really want to delete ?
+                        <div id="idEmployee"></div>
+                        <div id="nameEmployee"></div>
+                        <input type="hidden" value="delete" name="action">
+
+                        <input type="hidden" id="idDelete" name="idEmployee">
+<%--                        // name="..." phải giống bên controller--%>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -96,6 +177,14 @@ z-index: 2;">
 <%--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>--%>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    function confirmDelete(id, name) {
+        document.getElementById("idEmployee").innerText = "Employee Id: " + id;
+        document.getElementById("nameEmployee").innerText = "Employee name: " + name;
+        document.getElementById("idDelete").value = id;
+    }
+</script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable(
