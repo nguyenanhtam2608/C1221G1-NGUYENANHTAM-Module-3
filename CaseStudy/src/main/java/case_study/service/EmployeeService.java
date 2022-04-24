@@ -1,5 +1,6 @@
 package case_study.service;
 
+import case_study.model.Customer;
 import case_study.model.Employee;
 
 import java.sql.SQLException;
@@ -12,5 +13,10 @@ public interface EmployeeService {
 
     boolean deleteEmployee(int id) throws SQLException;
 
-    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail);
+    boolean updateEmployee(Employee employee);
+
+    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail) throws SQLException;
+
+    Employee findById(int id);
+
 }

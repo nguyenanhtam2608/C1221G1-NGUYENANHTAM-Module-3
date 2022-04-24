@@ -47,7 +47,7 @@
 
 <div class="row colorp">
     <div class="col-1"></div>
-    <div class="col-1">Contract</div>
+    <div class="col-1"><a href="/contract" style="text-decoration: none">Contract</a></div>
     <div class="col-1"><a href="/customer" style="text-decoration: none">Customer</a></div>
     <div class="col-1"><a href="/service" style="text-decoration: none">Service </a></div>
     <div class="col-1"><a href="/employee" style="text-decoration: none">Employee</a></div>

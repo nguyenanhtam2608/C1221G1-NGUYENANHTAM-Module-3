@@ -69,9 +69,7 @@ z-index: 2;">
                 <td><c:out value="${employee.customer_name}"></c:out></td>
                 <td><c:out value="${employee.customer_birthday}"></c:out></td>
 
-                    <%--                <td><c:out value="${customer.customer_gender eq 1 ? 'nam' : 'nu'}"></c:out>--%>
 
-                    <%--                    eq 1 ? 'nam' : 'nu' toán tử 3 ngôi--%>
                 <td><c:if test="${employee.customer_gender==1}">
                     <c:out value="Male"></c:out>
                 </c:if>

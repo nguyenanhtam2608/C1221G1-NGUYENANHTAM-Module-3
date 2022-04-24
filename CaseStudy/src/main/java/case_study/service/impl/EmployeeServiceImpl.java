@@ -25,8 +25,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail) {
+    public boolean updateEmployee(Employee employee) {
+        return employeeRepository.updateEmployee(employee);
+    }
+
+    @Override
+    public List<Employee> searchByNamePositionEmail(String keywordName, String keywordPosition, String keywordEmail) throws SQLException {
         return employeeRepository.searchByNamePositionEmail(keywordName,keywordPosition,keywordEmail);
+    }
+
+    @Override
+    public Employee findById(int id) {
+        return employeeRepository.findById(id);
     }
 
 }

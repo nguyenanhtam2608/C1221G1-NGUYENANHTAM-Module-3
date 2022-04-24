@@ -23,7 +23,7 @@
             <tr>
 
                 <td>
-                    <input type="hidden" name="id_customer" value="${customer.id_customer}">
+                    <input type="text" name="id_customer" value="${customer.id_customer}">
                 </td>
 
             </tr>

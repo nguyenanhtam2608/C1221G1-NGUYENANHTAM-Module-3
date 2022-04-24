@@ -142,7 +142,7 @@ z-index: 2;">
                     </button>
                 </div>
 
-                <form method="post" >
+                <form method="post"  >
 <%--                    gửi qua method post của trang employee--%>
                     <div class="modal-body">
                         Do you really want to delete ?
