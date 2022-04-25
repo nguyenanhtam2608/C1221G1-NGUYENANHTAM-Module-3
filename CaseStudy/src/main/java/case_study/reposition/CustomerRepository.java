@@ -9,13 +9,17 @@ import java.util.List;
 public interface CustomerRepository {
 
     List<Customer> selectAllCustomer();
+
     Customer findById(int id);
 
-    void insertCustomer(Customer customer) throws SQLException;
+    void insertCustomer(Customer customer);
 
     boolean deleteCustomer(int id) throws SQLException;
 
     boolean updateCustomer(Customer customer);
-    List<Customer> searchName(String name);;
+
+    List<Customer> searchName(String name);
+
+
 
 }

@@ -166,7 +166,7 @@ break;
             throwables.printStackTrace();
         }
         try {
-            response.sendRedirect("/employee");
+            response.sendRedirect("employee");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -192,7 +192,7 @@ break;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        response.sendRedirect("employee");
+        response.sendRedirect("/employee");
 
     }
 }

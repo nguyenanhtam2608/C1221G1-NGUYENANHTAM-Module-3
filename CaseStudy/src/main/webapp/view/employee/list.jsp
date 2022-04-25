@@ -43,7 +43,7 @@
     <button type="submit">Search</button>
 </form>
 
-
+<form method="post" action="/employee">
 <div style="text-align: center">
     <caption><h2>List of Employee</h2></caption>
 
@@ -142,7 +142,7 @@ z-index: 2;">
                     </button>
                 </div>
 
-                <form method="post"  >
+                <form method="post">
 <%--                    gửi qua method post của trang employee--%>
                     <div class="modal-body">
                         Do you really want to delete ?
@@ -164,7 +164,7 @@ z-index: 2;">
     </div>
 
 </div>
-
+</form>
 </body>
 </html>
 <%--bootrap 4.6 + 3.5  + phân trang--%>

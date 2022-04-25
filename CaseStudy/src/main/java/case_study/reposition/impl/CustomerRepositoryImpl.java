@@ -72,7 +72,7 @@ public class CustomerRepositoryImpl implements case_study.reposition.CustomerRep
 
 
     @Override
-    public void insertCustomer(Customer customer) throws SQLException {
+    public void insertCustomer(Customer customer) {
         System.out.println(INSERT_CUSTOMER);
         try {
             Connection connection = baseRepository.getConnection();
@@ -100,7 +100,7 @@ public class CustomerRepositoryImpl implements case_study.reposition.CustomerRep
         Connection connection = baseRepository.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER);
         preparedStatement.setInt(1, id);
-        rowDelete = preparedStatement.executeUpdate() > 0; //có phần tử mới được xóa
+        rowDelete = preparedStatement.executeUpdate() > 0; //c  ó phần tử mới được xóa
         return rowDelete;
     }
 
@@ -164,6 +164,7 @@ public class CustomerRepositoryImpl implements case_study.reposition.CustomerRep
 
 
     }
+
 
 
     private void printSQLException(SQLException ex) {

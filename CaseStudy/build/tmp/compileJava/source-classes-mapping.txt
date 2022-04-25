@@ -4,10 +4,10 @@ case_study/service/CustomerTypeService.java
  case_study.service.CustomerTypeService
 case_study/model/EducationDegree.java
  case_study.model.EducationDegree
-case_study/service/impl/CustomerTypeServiceImpl.java
- case_study.service.impl.CustomerTypeServiceImpl
 case_study/reposition/impl/EmployeeRepositoryImpl.java
  case_study.reposition.impl.EmployeeRepositoryImpl
+case_study/controller/EmployeeController.java
+ case_study.controller.EmployeeController
 case_study/controller/HomeController.java
  case_study.controller.HomeController
 case_study/service/EmployeeService.java
@@ -30,6 +30,8 @@ case_study/reposition/EmployeeRepository.java
  case_study.reposition.EmployeeRepository
 case_study/service/PositionService.java
  case_study.service.PositionService
+case_study/model/Contract.java
+ case_study.model.Contract
 case_study/model/Employee.java
  case_study.model.Employee
 case_study/reposition/impl/CustomerRepositoryImpl.java
@@ -48,10 +50,12 @@ case_study/reposition/CustomerTypeRepository.java
  case_study.reposition.CustomerTypeRepository
 case_study/service/impl/PositionServiceImpl.java
  case_study.service.impl.PositionServiceImpl
+case_study/controller/ContractController.java
+ case_study.controller.ContractController
 case_study/model/ServiceType.java
  case_study.model.ServiceType
-case_study/reposition/ServiceTypeRepository.java
- case_study.reposition.ServiceTypeRepository
+case_study/service/impl/EmployeeServiceImpl.java
+ case_study.service.impl.EmployeeServiceImpl
 case_study/service/RentTypeService.java
  case_study.service.RentTypeService
 case_study/reposition/impl/ServiceRepositoryIpml.java
@@ -78,6 +82,8 @@ case_study/controller/ServiceController.java
  case_study.controller.ServiceController
 case_study/reposition/ServiceRepository.java
  case_study.reposition.ServiceRepository
+case_study/common/Validate.java
+ case_study.common.Validate
 case_study/reposition/impl/DivisionRepositoryImpl.java
  case_study.reposition.impl.DivisionRepositoryImpl
 case_study/reposition/impl/PositionRepositoryImpl.java
@@ -94,7 +100,7 @@ case_study/service/impl/CustomerServiceImpl.java
  case_study.service.impl.CustomerServiceImpl
 case_study/model/Position.java
  case_study.model.Position
-case_study/service/impl/EmployeeServiceImpl.java
- case_study.service.impl.EmployeeServiceImpl
-case_study/controller/EmployeeController.java
- case_study.controller.EmployeeController
+case_study/service/impl/CustomerTypeServiceImpl.java
+ case_study.service.impl.CustomerTypeServiceImpl
+case_study/reposition/ServiceTypeRepository.java
+ case_study.reposition.ServiceTypeRepository

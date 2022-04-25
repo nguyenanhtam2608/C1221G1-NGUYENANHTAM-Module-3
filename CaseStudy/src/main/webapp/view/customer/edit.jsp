@@ -33,7 +33,9 @@
                 <td><input type="text" name="customer_name" size="45"
                            value="<c:out value="${customer.customer_name}">
 
-</c:out>"></td>
+
+</c:out>">
+                    <p style="color:red;">${error.get("name")}</p></td>
             </tr>
             <tr>
                 <td>Customer Type:</td>

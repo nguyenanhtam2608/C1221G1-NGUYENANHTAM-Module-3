@@ -9,4 +9,6 @@ import java.util.List;
 public interface ServiceService {
     List<Service> selectAllService();
     void insertCustomer(Service service) throws SQLException;
+
+
 }

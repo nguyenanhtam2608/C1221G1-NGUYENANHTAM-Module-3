@@ -2,6 +2,7 @@ package case_study.controller;
 
 import case_study.model.Customer;
 import case_study.model.CustomerType;
+
 import case_study.service.CustomerService;
 import case_study.service.CustomerTypeService;
 import case_study.service.impl.CustomerServiceImpl;
@@ -13,7 +14,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerController", urlPatterns = "/customer")
 public class CustomerController extends HttpServlet {
@@ -107,7 +110,11 @@ public class CustomerController extends HttpServlet {
 
         switch (action) {
             case "create":
-                insertCustomer(request, response);
+                try {
+                    insertCustomer(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
             case "delete":
                 deleteCustomer(request, response);
@@ -121,21 +128,36 @@ public class CustomerController extends HttpServlet {
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id_customer"));// gửi qua jsp
-        int customer_type_id = Integer.parseInt(request.getParameter("customer_type_id"));
-        String customer_name = request.getParameter("customer_name");
-        String customer_birthday = request.getParameter("customer_birth_day");
-        int customer_gender = Integer.parseInt(request.getParameter("customer_gender"));
-        int customer_id_card = Integer.parseInt(request.getParameter("customer_id_card"));
-        String customer_phone = request.getParameter("customer_phone");
-        String customer_email = request.getParameter("customer_email");
-        String customer_address = request.getParameter("customer_address");
-        Customer customer = new Customer(id,customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address);
-        customerService.updateCustomer(customer);
-        try {
-            response.sendRedirect("/customer");
-        } catch (IOException e) {
-            e.printStackTrace();
+        Map<String, String> map = validate(request);//b1validate
+        if (map.isEmpty()) {
+            int id = Integer.parseInt(request.getParameter("id_customer"));// gửi qua jsp
+            int customer_type_id = Integer.parseInt(request.getParameter("customer_type_id"));
+            String customer_name = request.getParameter("customer_name");
+            String customer_birthday = request.getParameter("customer_birth_day");
+            int customer_gender = Integer.parseInt(request.getParameter("customer_gender"));
+            int customer_id_card = Integer.parseInt(request.getParameter("customer_id_card"));
+            String customer_phone = request.getParameter("customer_phone");
+            String customer_email = request.getParameter("customer_email");
+            String customer_address = request.getParameter("customer_address");
+            Customer customer = new Customer(id, customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address);
+            customerService.updateCustomer(customer);
+            try {
+                response.sendRedirect("/customer");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            request.setAttribute("error", map);
+            List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+            request.setAttribute("customerTypeList", customerTypeList);
+            try {
+                request.getRequestDispatcher("view/customer/edit.jsp").forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -159,25 +181,61 @@ public class CustomerController extends HttpServlet {
     }
 
 
-    private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id =null;
-        int customer_type_id = Integer.parseInt(request.getParameter("customer_type_id"));
-        String customer_name = request.getParameter("customer_name");
-        String customer_birthday = request.getParameter("customer_birth_day");
-        int customer_gender = Integer.parseInt(request.getParameter("customer_gender"));
-        int customer_id_card = Integer.parseInt(request.getParameter("customer_id_card"));
-        String customer_phone = request.getParameter("customer_phone");
-        String customer_email = request.getParameter("customer_email");
-        String customer_address = request.getParameter("customer_address");
-        Customer customer = new Customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address);
+    private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        Map<String, String> map = validate(request);//b1validate
+//
+        if (map.isEmpty()) {//b2 nếu không có lõi sẽ tạo binh thường
+            Integer id = null;
+            int customer_type_id = Integer.parseInt(request.getParameter("customer_type_id"));
+            String customer_name = request.getParameter("customer_name");
+            String customer_birthday = request.getParameter("customer_birth_day");
+            int customer_gender = Integer.parseInt(request.getParameter("customer_gender"));
+            int customer_id_card = Integer.parseInt(request.getParameter("customer_id_card"));
+            String customer_phone = request.getParameter("customer_phone");
+            String customer_email = request.getParameter("customer_email");
+            String customer_address = request.getParameter("customer_address");
 
-        try {
+            Customer customer = new Customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address);
             customerService.insertCustomer(customer);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+
+//            request.setAttribute("error", map);
+            request.setAttribute("customer", customer);
+            List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+            request.setAttribute("customerTypeList", customerTypeList);
+            try {
+                response.sendRedirect("/customer");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else { // nếu có lỗi sẽ thông báo tới jsp và
+            try {
+                request.setAttribute("error", map);
+                List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+                request.setAttribute("customerTypeList", customerTypeList);
+                request.getRequestDispatcher("view/customer/create.jsp").forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        response.sendRedirect("customer");
+    }
+    // method validate
+    private Map<String, String> validate(HttpServletRequest request) {
+        Map<String, String> map = new HashMap<>();
+        if (request.getParameter("customer_name").equals("")) {
+            map.put("name", "name customer cannot be empty");
+        } if (request.getParameter("customer_phone").equals("")) {
+            map.put("phone", "phone customer cannot be empty");
+        }
+        if (request.getParameter("customer_id_card").equals("")) {
+            map.put("cmnd", "Id card customer cannot be empty");
+        }
 
-
+        return map;
     }
 }
+
+
+

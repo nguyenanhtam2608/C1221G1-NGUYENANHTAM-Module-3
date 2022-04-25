@@ -1,15 +1,19 @@
 package case_study.service.impl;
 
+import case_study.common.Validate;
 import case_study.model.Customer;
 import case_study.reposition.CustomerRepository;
 import case_study.reposition.impl.CustomerRepositoryImpl;
 import case_study.service.CustomerService;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository = new CustomerRepositoryImpl();
@@ -44,3 +48,4 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.searchName(name);
     }
 }
+

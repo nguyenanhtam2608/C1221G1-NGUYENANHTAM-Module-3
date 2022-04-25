@@ -23,7 +23,10 @@
 
             <tr>
                 <th>Name</th>
-                <td><input type="text" name="customer_name" size="45"></td>
+                <td><input type="text" name="customer_name" size="45">
+                    <p style="color:red;">${error.get("name")}</p>
+                </td>
+
             </tr>
 
             <tr>
@@ -34,13 +37,14 @@
                                 ${customerType.nameCustomerType}</option>
                     </c:forEach>
                 </select></td>
+
             </tr>
 
             <tr>
                 <th>Birth Day</th>
                 <td><input type="date" name="customer_birth_day" size="45"></td>
             </tr>
-          <tr>
+            <tr>
                 <td>Customer Gender:</td>
                 <td><select name="customer_gender" id="gender">
                     <option value="0">Female</option>
@@ -50,11 +54,17 @@
             </tr>
             <tr>
                 <th>CMND</th>
-                <td><input type="text" name="customer_id_card" size="45"></td>
+                <td><input type="text" name="customer_id_card" size="45">
+                    <p style="color:red;">${error.get("cmnd")}</p></td>
+
             </tr>
             <tr>
                 <th>Number phone</th>
-                <td><input type="text" name="customer_phone" size="45"></td>
+                <td><input type="text" name="customer_phone" size="45" >
+
+                    <p style="color:red;">${error.get("phone")}</p>
+                </td>
+
             </tr>
             <tr>
                 <th>Email</th>

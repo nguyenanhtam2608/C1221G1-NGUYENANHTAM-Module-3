@@ -74,7 +74,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(DELETEEMPLOYEE);
 
         preparedStatement.setInt(1, id);
-        rowDelete = preparedStatement.executeUpdate() > 0; //có phần tử mới được xóa
+        rowDelete = preparedStatement.executeUpdate() >= 0; //có phần tử mới được xóa
         return rowDelete;
     }
 
@@ -114,7 +114,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         // Step 2:Create a statement using connection object
         PreparedStatement preparedStatement = connection.
-                prepareStatement("select * from employee  where employee_name like ? and cast(position_id as char ) like ? and employee_email like ?");
+                prepareStatement("select * from employee  where employee_name like ? and    cast(position_id as char ) like ? and employee_email like ?");
         {
             preparedStatement.setString(1, "%" + keywordName + "%");
             preparedStatement.setString(2, keywordPosition);

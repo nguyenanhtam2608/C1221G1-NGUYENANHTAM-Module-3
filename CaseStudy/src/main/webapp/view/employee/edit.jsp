@@ -28,7 +28,8 @@
             </tr>
             <tr>
                 <th>Name Employee</th>
-                <td><input type="text" name="nameEmployee" size="45" value="${employee.nameEmployee}"></td>
+                <td><input type="text" name="nameEmployee" size="45" value="${employee.nameEmployee}">
+                </td>
             </tr>
 
             <tr>
