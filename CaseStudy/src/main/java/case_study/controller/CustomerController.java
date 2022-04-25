@@ -1,5 +1,6 @@
 package case_study.controller;
 
+import case_study.common.Validate;
 import case_study.model.Customer;
 import case_study.model.CustomerType;
 
@@ -147,7 +148,7 @@ public class CustomerController extends HttpServlet {
                 e.printStackTrace();
             }
 
-        }else {
+        } else {
             request.setAttribute("error", map);
             List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
             request.setAttribute("customerTypeList", customerTypeList);
@@ -221,16 +222,22 @@ public class CustomerController extends HttpServlet {
             }
         }
     }
+
     // method validate
     private Map<String, String> validate(HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         if (request.getParameter("customer_name").equals("")) {
             map.put("name", "name customer cannot be empty");
-        } if (request.getParameter("customer_phone").equals("")) {
+        }
+        if (request.getParameter("customer_phone").equals("")) {
             map.put("phone", "phone customer cannot be empty");
+        } else if (!request.getParameter("customer_phone").matches(Validate.TELEPHONE_NUMBER_REGEX)) {
+            map.put("phone", "Phone number must be in this format: begin with [090 or 091 or (84)+90 or (84)+91)] and 7 number from 0 to 9");
         }
         if (request.getParameter("customer_id_card").equals("")) {
             map.put("cmnd", "Id card customer cannot be empty");
+        } else if (!request.getParameter("customer_id_card").matches(Validate.ID_CARD_REGEX)) {
+            map.put("cmnd", "ID Card must be in this format: have 9 or 12 number");
         }
 
         return map;

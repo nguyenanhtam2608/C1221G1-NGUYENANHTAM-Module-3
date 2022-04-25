@@ -69,6 +69,7 @@
                            value="<c:out value="${customer.customer_id_card}">
 
 </c:out>">
+                    <p style="color:red;">${error.get("cmnd")}</p></td>
                 </td>
             </tr>
             <tr>
@@ -77,6 +78,7 @@
                            value="<c:out value="${customer.customer_phone}">
 
 </c:out>">
+                    <p style="color:red;">${error.get("phone")}</p></td>
                 </td>
             </tr>
             <tr>
