@@ -24,8 +24,8 @@ case_study/reposition/RentTypeRepository.java
  case_study.reposition.RentTypeRepository
 case_study/model/CustomerType.java
  case_study.model.CustomerType
-case_study/reposition/ServiceTypeRepository.java
- case_study.reposition.ServiceTypeRepository
+case_study/controller/CustomerController.java
+ case_study.controller.CustomerController
 case_study/reposition/EmployeeRepository.java
  case_study.reposition.EmployeeRepository
 case_study/service/PositionService.java
@@ -102,5 +102,5 @@ case_study/model/Position.java
  case_study.model.Position
 case_study/service/impl/CustomerTypeServiceImpl.java
  case_study.service.impl.CustomerTypeServiceImpl
-case_study/controller/CustomerController.java
- case_study.controller.CustomerController
+case_study/reposition/ServiceTypeRepository.java
+ case_study.reposition.ServiceTypeRepository
